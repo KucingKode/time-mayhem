@@ -318,7 +318,7 @@ export default class MainScene extends Phaser.Scene {
 			.setScrollFactor(0)
 			.setDepth(103)
 
-        // add player character
+    // add player character
 		this.playablePlayer = this.addPlayer(0)
 		this.playablePlayer.onDie = () => {
 			this.blackRect.setAlpha(0.5)
@@ -332,7 +332,7 @@ export default class MainScene extends Phaser.Scene {
 			.startFollow(this.playablePlayer)
 			.setBounds(0, 0, bgWidth * 1.5, bgHeight * 1.5)
 
-        // add platforms
+    // add platforms
 		for (let i = 0; i < platforms.length; i++) {
 			const [x, y, config] = platforms[i]
 			const platformObject = new Platform(this, theme, x, y, config)
@@ -340,7 +340,7 @@ export default class MainScene extends Phaser.Scene {
 			this.raycaster.mapGameObjects(platformObject.rect)
 		}
 
-        // inputs
+    // inputs
 		this.keyboard = this.input.keyboard.addKeys('W,A,S,D,UP,LEFT,RIGHT,DOWN')
 		this.input.mouse.disableContextMenu()
 
@@ -359,16 +359,16 @@ export default class MainScene extends Phaser.Scene {
 
 		this.input.on('pointerdown', (pointer) => {
 			if (this.playablePlayer.isKilled) {
-                // reload page
+				// reload page
 				window.location.reload()
 			} else if (pointer.rightButtonDown()) {
 				this.playablePlayer.bomb()
 			} else {
 				if (this.state === 'WAITING') {
-                    // start play
-                    this.powerupInterval = setInterval(() => {
-                        this.addPowerup()
-                    }, POWERUP_SPAWN_INTERVAL)
+					// start play
+					this.powerupInterval = setInterval(() => {
+							this.addPowerup()
+					}, POWERUP_SPAWN_INTERVAL)
 
 					this.blackRect.setAlpha(0)
 					this.waitingText.destroy()
@@ -378,7 +378,7 @@ export default class MainScene extends Phaser.Scene {
 					this.timeBar.setAlpha(1)
 					this.timeBarBg.setAlpha(1)
 				} else {
-                    // shoot
+					// shoot
 					this.isShooting = true
 				}
 			}
@@ -418,14 +418,14 @@ export default class MainScene extends Phaser.Scene {
 		const dDown = this.keyboard.D.isDown
 		const rightDown = this.keyboard.RIGHT.isDown
 
-        // update gui
+    // update gui
 		this.timeBar.width = this.getTimeBarLength()
 		this.bombBar.setFillStyle(
 			this.playablePlayer.haveBomb ? 0xffffff : 0x000000,
 		)
 		this.timeStealedText.text = this.timeStealed / 1000
 
-        // update player
+    // update player
 		if (this.isShooting) {
 			this.playablePlayer.shoot(
 				this.input.mousePointer.x + this.cameras.main.worldView.x,

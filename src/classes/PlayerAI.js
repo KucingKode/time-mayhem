@@ -20,8 +20,8 @@ class PlayerAI extends Player {
 		this.nextTargetX = 3000
 	}
 
-	onKill() {
-		this.scene.events.off('update', this.makeMove, this)
+	onDie() {
+		this.scene.events.off('update', this.makeAIMove, this)
 		this.scene.enemyCount--
 		if (this.scene.enemyCount === 0) this.scene.spawnEnemy()
 	}

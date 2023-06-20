@@ -6,20 +6,20 @@ class Platform extends Phaser.Physics.Arcade.Image {
 		const [width, height] = config
 
 		super(scene, x + width / 2, y + height / 2, texture)
+		
+		this.scene.add.existing(this)
+		this.scene.physics.add.existing(this, true)
 
-		scene.add.existing(this)
-		scene.physics.add.existing(this, true)
+		this.setSize(width, height / 2).setDisplaySize(width, height).setPipeline('Light2D')
 
 		this.hitted = false
 		this.rect = this.scene.add.rectangle(
-			this.body.x + this.body.width / 2,
-			this.body.y + this.body.offset.y,
+			this.x,
+			this.y,
 			this.body.width,
 			this.body.height,
 		)
 
-		this.setDisplaySize(width, height).setPipeline('Light2D')
-		this.body.setSize(width, height / 2).setOffset(0, height / 3.5)
 		this.rect.objectType = 'PLATFORM'
 		this.rect.hit = () => this.hit()
 
